@@ -6,7 +6,7 @@ Os projetos de exemplo abaixo implementam o conceito básico por trás do estilo
 ![alt text](documentation/architectural_style_proposed_v2_horizontal.png)
 
 ## Diagrama de Componentes
-![alt text](documentation/diagrama_de_componentes.png)
+![](https://github.com/Eventchain-Example/exemplo-base/blob/main/documentation/diagrama_de_componentes.png | width=70)
 
 ## Implementação
 Explicação sobre a implementação
