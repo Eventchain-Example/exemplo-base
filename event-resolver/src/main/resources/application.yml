@@ -1,0 +1,42 @@
+server:
+  port: 8183
+
+spring:
+  application:
+    name: eventResolver
+
+  jackson:
+    mapper:
+      DEFAULT_VIEW_INCLUSION: true
+    serialization:
+      indent_output: true
+      WRITE_DATES_AS_TIMESTAMPS: false
+    deserialization:
+      FAIL_ON_IGNORED_PROPERTIES: false
+      FAIL_ON_UNKNOWN_PROPERTIES: false
+      ACCEPT_SINGLE_VALUE_AS_ARRAY: true
+    default-property-inclusion: non_empty
+
+  kafka:
+    producer:
+      bootstrap-servers: 192.168.1.100:9092
+    consumer:
+      group-id: event-resolver-5
+      bootstrap-servers: 192.168.1.100:9092
+
+event-resolver:
+  topic:
+    transfers: TRANSFERS
+  blockchain:
+    network: mychannel
+    pemFile: /opt/fabric-tools/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/ca/ca.org1.example.com-cert.pem
+    configFile: /opt/fabric-tools/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/connection-org1.yaml
+
+logging:
+  level:
+    org.springframework.web: DEBUG
+    org.springframework.security: DEBUG
+    poc.eventchain: DEBUG
+    com.example: DEBUG
+  file: app.log
+  
