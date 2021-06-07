@@ -6,7 +6,7 @@ Os projetos de exemplo abaixo implementam o conceito básico por trás do estilo
 ![alt text](documentation/architectural_style_proposed_v2_horizontal.png)
 
 ## Diagrama de Componentes
-![](documentation/diagrama_de_componentes.png){:height="50%" width="50%"}
+![alt text](documentation/diagrama_de_componentes.png)
 
 ## Implementação
 Explicação sobre a implementação
