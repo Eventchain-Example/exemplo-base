@@ -1,6 +1,9 @@
 # Eventchain - exemplo-base
-
 Os projetos de exemplo abaixo implementam o conceito básico por trás do estilo arquitetural Eventchain, proposto na dissertação de mestrado em computação aplicada na Unisinos - 2021.
+
+## Estilo arquitetural
+A introdução, motivação e visão geral do estilo arquitetural proposto estão disponíveis [aqui](/documentation/eventchain_tam_presentation_v2.pdf). 
+Essa apresentação tem como objetivo ser utilizada como base para responder as questões do [questionário TAM disponíbilizado](https://forms.gle/odmfbcDCWsFKQRe26).
 
 ## Arquitetura
 ![alt text](documentation/architectural_style_proposed_v2_horizontal.png)
