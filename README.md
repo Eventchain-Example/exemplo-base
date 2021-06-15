@@ -9,7 +9,7 @@ Os projetos de exemplo abaixo implementam o conceito básico por trás do estilo
 ![alt text](documentation/diagrama_de_componentes.png)
 
 ## Implementação
-Explicação sobre a implementação
+Explicação sobre o objetivo e a implementação de cada componente 
 
 |  **Projeto** | **Descrição** | **Implementação** |
 | -----------|------------------------------|----------|
