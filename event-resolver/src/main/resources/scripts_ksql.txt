@@ -1,0 +1,56 @@
+create stream accountTransaction_st (ID VARCHAR key, number VARCHAR, BRANCH VARCHAR, bank VARCHAR, balance double, taxId VARCHAR, eventType VARCHAR, receiptNumber VARCHAR, amount double) WITH (KAFKA_TOPIC='accountTransaction', VALUE_FORMAT='JSON');
+
+
+create stream credit_st as 
+	SELECT
+		id,
+		number,		
+		branch, 			
+		bank, 			
+		taxId, 			
+		eventType, 		
+		receiptNumber,
+		amount	
+	FROM
+		accountTransaction_st
+	WHERE
+		eventType = 'CREDIT'
+emit changes;
+
+create stream debit_st as 
+	SELECT
+		id,
+		number,		
+		branch, 			
+		bank, 			
+		taxId, 			
+		eventType, 		
+		receiptNumber,
+		amount	
+	FROM
+		accountTransaction_st
+	WHERE
+		eventType = 'DEBIT'
+emit changes;
+
+create table transfers as 
+select 
+	LATEST_BY_OFFSET(fromAccount.number) AS from_number,
+	LATEST_BY_OFFSET(fromAccount.branch) AS from_branch,
+	LATEST_BY_OFFSET(fromAccount.bank) AS from_bank,
+	LATEST_BY_OFFSET(fromAccount.taxId) AS from_taxId,
+
+	LATEST_BY_OFFSET(toAccount.number) AS to_number,
+	LATEST_BY_OFFSET(toAccount.branch) AS to_branch,
+	LATEST_BY_OFFSET(toAccount.bank) AS to_bank,
+	LATEST_BY_OFFSET(toAccount.taxId) AS to_taxId,
+
+	LATEST_BY_OFFSET(fromAccount.receiptNumber) AS receiptNumber,
+	LATEST_BY_OFFSET(toAccount.amount) AS amount,
+	fromAccount.receiptNumber
+from debit_st as fromAccount
+inner join credit_st as toAccount
+WITHIN 10 MINUTES
+on fromAccount.receiptNumber = toAccount.receiptNumber
+group by fromAccount.receiptNumber
+emit changes;
