@@ -38,7 +38,7 @@ public class EventResolverConsumer {
         network = gateway.getNetwork(networkName);
     }
 
-//    @KafkaListener(topics = "${event-resolver.topic.transfers}", groupId = "${spring.kafka.consumer.group-id}", containerFactory = "kafkaListenerContainerFactory")
+    @KafkaListener(topics = "${event-resolver.topic.transfers}", groupId = "${spring.kafka.consumer.group-id}", containerFactory = "kafkaListenerContainerFactory")
     public void listen(String event, Acknowledgment ack, @Header(KafkaHeaders.RECEIVED_PARTITION_ID) String partition, @Header(KafkaHeaders.OFFSET) String offset,
                        @Header(KafkaHeaders.RECEIVED_TOPIC) String topicName) {
 
@@ -63,8 +63,8 @@ public class EventResolverConsumer {
 
     private void sendTransferToBlockchain(String transferJSON) {
         try {
-            Contract contract = network.getContract("transfer");
-            contract.submitTransaction("createTransfer", transferJSON);
+            Contract contract = network.getContract("event-chaincode");
+            contract.submitTransaction("CreateTransfer", transferJSON);
 
         } catch (ContractException | InterruptedException | TimeoutException e) {
             log.error("Was not possible to send event to blockchain", e);

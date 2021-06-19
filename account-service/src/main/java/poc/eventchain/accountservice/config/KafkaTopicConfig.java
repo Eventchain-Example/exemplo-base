@@ -19,7 +19,7 @@ public class KafkaTopicConfig {
     @Value("${account.topic.event}")
     private String topicName;
 
-    @Value("${account.topic.trasanction}")
+    @Value("${account.topic.transaction}")
     private String transactionTopic;
 
     @Bean
